@@ -1,29 +1,32 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Bienvenido  {{ title }}!
-  </h1>
-</div>
-<h2>Crea tu cuenta con emial y password: </h2>
-<section >
-  <div class="form-group">
-    <label>Email address</label>
-    <input type="email" #email required>
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" #password required>
-    <label class="error">{{errorMessage}}</label>
-    <label class="success">{{successMessage}}</label>
 
-  </div>
-  <button  (click)="crearUsuarioPorEmail()">Registrar</button> <br>
+<form  #userForm="ngForm" >
+  <h3>{{title}}</h3>
+  <hr>
+
+  <label for="email">Email</label>
+  <input type="email"
+  [(ngModel)]="model.email" #email="ngModel" [ngModelOptions]="{standalone: true}" required >
+
+
+  <label for="password">Password</label>
+  <input type="password"
+  [(ngModel)]="model.password" #password="ngModel"  [ngModelOptions]="{standalone: true}" required >
+
+
+  <button type="submit"  [disabled]="!userForm.valid"  (click)="crearUsuarioPorEmail()">Registrar</button> 
+  
   <button (click)="resetarContrasena()" >Reset Password</button> <br>
   <button (click)="loguear()" >login</button> <br>
 
-</section>
-<ul>
-  <li><label class="">{{resetInfo}}</label></li>
-  <li><label class="">{{loginMessage}}</label></li>
-</ul>
+  <span *ngIf="userForm.valid" >Form is valid</span> <br>
+
+  <label class="error">{{errorMessage}}</label>
+  <label class="success">{{successMessage}}</label>
+
+  <ul>
+    <li><label class="">{{resetInfo}}</label></li>
+    <li><label class="">{{loginMessage}}</label></li>
+  </ul>
+
+</form>
 
